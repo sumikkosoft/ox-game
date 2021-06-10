@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/ox-game/",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier -w ./src/*"
   },
