@@ -1,0 +1,7 @@
+.stage {
+  // background-color: black;
+  background-image: radial-gradient(#ddd 10%, transparent 20%),
+    radial-gradient(#ddd 10%, transparent 20%);
+  background-position: 0 0, 5px 5px;
+  background-size: 10px 10px;
+}

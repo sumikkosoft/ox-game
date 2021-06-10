@@ -1,0 +1,11 @@
+.wrapper {
+  width: 70vw;
+  height: 70vw;
+}
+
+@media (min-width: 640px) {
+  .wrapper {
+    width: 28rem;
+    height: 28rem;
+  }
+}
