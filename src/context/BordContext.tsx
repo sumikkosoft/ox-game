@@ -2,8 +2,8 @@ import React, { createContext, Dispatch, useReducer } from "react";
 import { Judge } from "../utils/judge";
 
 export type Turn = "○" | "×";
-type Move = number;
-type Result = "" | "○" | "×" | "drow";
+export type Move = number;
+export type Result = "" | "○" | "×" | "drow";
 export type Square = 0 | 1 | 2;
 export type Bord = Square[];
 
