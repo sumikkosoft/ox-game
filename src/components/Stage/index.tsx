@@ -17,7 +17,7 @@ export const Stage = () => {
     >
       {[...Array(9)].map((_, index) => {
         const view = game.bord[index] === 1 ? "○" : game.bord[index] === 2 ? "×" : "";
-        const enabled = game.bord[index] === 0 && game.result === "";
+        const enabled = game.bord[index] === 0 && !game.result;
         return (
           <Square
             key={`Square_${index}`}

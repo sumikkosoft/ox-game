@@ -3,7 +3,8 @@ import { Judge } from "../utils/judge";
 
 export type Turn = "○" | "×";
 export type Move = number;
-export type Result = "" | "○" | "×" | "drow";
+export type Result = boolean;
+export type Win = "" | "○" | "×" | "drow";
 export type Square = 0 | 1 | 2;
 export type Bord = Square[];
 
@@ -34,9 +35,22 @@ type ActionType =
   | ReturnType<typeof judgeGameAction>
   | ReturnType<typeof resetGameAction>;
 
-export type State = { result: Result; bord: Bord; turn: Turn; move: Move };
+/**
+ * Stateのtype
+ * @param {Result} result - 勝敗が付いたか
+ * @param {Win} win - 勝者、誰も勝ってなければ空文字列
+ * @param {Bord} bord - 最新の盤面情報
+ * @param {Move} move - ターン数
+ */
+export type State = { result: Result; win: Win; bord: Bord; turn: Turn; move: Move };
 
-const inialState: State = { result: "", bord: [0, 0, 0, 0, 0, 0, 0, 0, 0], turn: "○", move: 0 };
+const inialState: State = {
+  result: false,
+  win: "",
+  bord: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  turn: "○",
+  move: 0,
+};
 
 const reducer = (state: State, action: ActionType): State => {
   switch (action.type) {
@@ -44,19 +58,15 @@ const reducer = (state: State, action: ActionType): State => {
       return state;
     case JUDGE_GAME: {
       const judge = new Judge(action.payload.bord);
-      const result = judge.result()
-        ? state.turn === "○"
-          ? "○"
-          : "×"
-        : state.move + 1 === 9
-        ? "drow"
-        : "";
+      const result = judge.result();
+      const win = result ? (state.turn === "○" ? "○" : "×") : state.move + 1 === 9 ? "drow" : "";
       return {
         ...state,
-        result: result,
+        result,
         bord: action.payload.bord,
         turn: state.turn === "○" ? "×" : "○",
         move: state.move + 1,
+        win,
       };
     }
     case RESET_GAME:

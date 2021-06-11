@@ -18,14 +18,14 @@ export const Game = () => {
 
   const result = React.useCallback((): string => {
     if (game.result) {
-      if (game.move === 9) {
-        return game.result;
-      }
-      return `win ${game.result}`;
+      return `win ${game.win}`;
     } else {
+      if (game.move === 9) {
+        return game.win;
+      }
       return "playing";
     }
-  }, [game.result]);
+  }, [game.win]);
 
   return (
     <div id="Game">
